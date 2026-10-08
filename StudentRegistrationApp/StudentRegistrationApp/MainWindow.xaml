@@ -1,0 +1,366 @@
+﻿<Window x:Class="StudentRegistrationApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Student Registration"
+        Height="720"
+        Width="1020"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F2F5"
+        FontFamily="Segoe UI"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        MinWidth="900"
+        MinHeight="650">
+
+    <Window.Resources>
+        <!-- Global: semua elemen snap ke pixel (anti-blur) -->
+        <Style TargetType="{x:Type FrameworkElement}">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!-- ==================== COLOR PALETTE ==================== -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#4F46E5"/>
+        <SolidColorBrush x:Key="WarningBrush" Color="#F59E0B"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
+        <SolidColorBrush x:Key="BorderBrush2" Color="#D0D5DD"/>
+        <SolidColorBrush x:Key="TextDarkBrush" Color="#111827"/>
+        <SolidColorBrush x:Key="TextMutedBrush" Color="#6B7280"/>
+
+        <!-- ==================== TEXTBOX STYLE ==================== -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="CaretBrush" Value="#4F46E5"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource BorderBrush2}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"
+                                          UseLayoutRounding="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#4F46E5"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#9CA3AF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ==================== COMBOBOX STYLE ==================== -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="BorderBrush" Value="#D0D5DD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!-- ==================== LABEL STYLE ==================== -->
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#374151"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
+
+        <!-- ==================== BUTTON BASE TEMPLATE ==================== -->
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              UseLayoutRounding="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Tombol Primary (Indigo) -->
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        </Style>
+
+        <!-- Tombol Warning (Amber) -->
+        <Style x:Key="WarningButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="{StaticResource WarningBrush}"/>
+        </Style>
+
+        <!-- Tombol Danger (Red) -->
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+        </Style>
+
+        <!-- ==================== CARD SHADOW ==================== -->
+        <DropShadowEffect x:Key="CardShadow"
+                          Color="#000000"
+                          Opacity="0.10"
+                          BlurRadius="10"
+                          ShadowDepth="1"
+                          Direction="270"
+                          RenderingBias="Performance"/>
+    </Window.Resources>
+
+    <Grid Margin="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ==================== FORM CARD ==================== -->
+        <Border Grid.Column="0"
+                Background="White"
+                CornerRadius="14"
+                Padding="28"
+                SnapsToDevicePixels="True"
+                UseLayoutRounding="True">
+            <Border.Effect>
+                <StaticResource ResourceKey="CardShadow"/>
+            </Border.Effect>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <!-- Header Form -->
+                    <StackPanel Margin="0,0,0,22">
+                        <TextBlock Text="STUDENT REGISTRATION"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource TextDarkBrush}"
+                                   UseLayoutRounding="True"/>
+                        <TextBlock Text="Isi data mahasiswa di bawah ini"
+                                   FontSize="12"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,4,0,0"/>
+                        <Border Height="3"
+                                Width="60"
+                                Background="{StaticResource PrimaryBrush}"
+                                HorizontalAlignment="Left"
+                                CornerRadius="2"
+                                Margin="0,12,0,0"/>
+                    </StackPanel>
+
+                    <!-- NIM -->
+                    <TextBlock Text="NIM" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="txtNim"
+                             Style="{StaticResource ModernTextBox}"/>
+
+                    <!-- Nama -->
+                    <TextBlock Text="Nama Mahasiswa" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="txtNama"
+                             Style="{StaticResource ModernTextBox}"/>
+
+                    <!-- Program Studi -->
+                    <TextBlock Text="Program Studi" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="cmbProdi"
+                              Style="{StaticResource ModernComboBox}">
+                        <ComboBoxItem Content="Teknik Informatika"/>
+                        <ComboBoxItem Content="Sistem Informasi"/>
+                        <ComboBoxItem Content="Manajemen"/>
+                        <ComboBoxItem Content="Akuntansi"/>
+                    </ComboBox>
+
+                    <!-- Jenis Kelamin -->
+                    <TextBlock Text="Jenis Kelamin" Style="{StaticResource FieldLabel}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,6,0,22">
+                        <RadioButton x:Name="rbLaki"
+                                     Content="Laki-laki"
+                                     FontSize="14"
+                                     Foreground="#374151"
+                                     Margin="0,0,28,0"
+                                     Cursor="Hand"
+                                     UseLayoutRounding="True"/>
+                        <RadioButton x:Name="rbPerempuan"
+                                     Content="Perempuan"
+                                     FontSize="14"
+                                     Foreground="#374151"
+                                     Cursor="Hand"
+                                     UseLayoutRounding="True"/>
+                    </StackPanel>
+
+                    <!-- Tombol Simpan & Reset -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button Content="💾  Simpan"
+                                Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,12,0"
+                                Click="BtnSimpan_Click"/>
+                        <Button Content="🔄  Reset"
+                                Style="{StaticResource WarningButton}"
+                                Click="BtnReset_Click"/>
+                    </StackPanel>
+
+                    <!-- Tombol Hapus -->
+                    <Button Content="🗑️  Hapus Data Terpilih"
+                            Style="{StaticResource DangerButton}"
+                            Width="252"
+                            HorizontalAlignment="Left"
+                            Click="BtnHapus_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- ==================== DATA CARD ==================== -->
+        <Border Grid.Column="2"
+                Background="White"
+                CornerRadius="14"
+                Padding="28"
+                SnapsToDevicePixels="True"
+                UseLayoutRounding="True">
+            <Border.Effect>
+                <StaticResource ResourceKey="CardShadow"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header Data -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,18">
+                    <TextBlock Text="DATA MAHASISWA"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource TextDarkBrush}"
+                               UseLayoutRounding="True"/>
+                    <TextBlock Text="Daftar mahasiswa yang telah terdaftar"
+                               FontSize="12"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               Margin="0,4,0,0"/>
+                    <Border Height="3"
+                            Width="60"
+                            Background="#10B981"
+                            HorizontalAlignment="Left"
+                            CornerRadius="2"
+                            Margin="0,12,0,0"/>
+                </StackPanel>
+
+                <!-- Counter -->
+                <Border Grid.Row="1"
+                        Background="#ECFDF5"
+                        CornerRadius="8"
+                        Padding="14,10"
+                        Margin="0,0,0,15"
+                        SnapsToDevicePixels="True">
+                    <TextBlock x:Name="txtCounter"
+                               Text="Jumlah Mahasiswa: 0"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="#065F46"
+                               UseLayoutRounding="True"/>
+                </Border>
+
+                <!-- ListBox -->
+                <Border Grid.Row="2"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        SnapsToDevicePixels="True">
+                    <ListBox x:Name="lstMahasiswa"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             FontSize="13"
+                             Padding="6"
+                             HorizontalContentAlignment="Stretch"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             UseLayoutRounding="True"
+                             SnapsToDevicePixels="True">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,0,0,4"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="UseLayoutRounding" Value="True"/>
+                                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="itemBorder"
+                                                    Background="#F9FAFB"
+                                                    CornerRadius="8"
+                                                    Padding="12,10"
+                                                    SnapsToDevicePixels="True">
+                                                <ContentPresenter/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="itemBorder" Property="Background" Value="#EEF2FF"/>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="itemBorder" Property="Background" Value="#E0E7FF"/>
+                                                    <Setter TargetName="itemBorder" Property="BorderBrush" Value="#4F46E5"/>
+                                                    <Setter TargetName="itemBorder" Property="BorderThickness" Value="1.5"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"
+                                           TextWrapping="Wrap"
+                                           Foreground="#1F2937"
+                                           UseLayoutRounding="True"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

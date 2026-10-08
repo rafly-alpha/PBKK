@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Rafly Al Fahrezi\\Documents\\PROGRAMING\\PBKK\\StudentRegistrationApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{574D1BF3-C25A-4F05-B373-BED35FCC3FEC}|StudentRegistrationApp\\StudentRegistrationApp.csproj|c:\\users\\rafly al fahrezi\\documents\\programing\\pbkk\\studentregistrationapp\\studentregistrationapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{574D1BF3-C25A-4F05-B373-BED35FCC3FEC}|StudentRegistrationApp\\StudentRegistrationApp.csproj|solutionrelative:studentregistrationapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{574D1BF3-C25A-4F05-B373-BED35FCC3FEC}|StudentRegistrationApp\\StudentRegistrationApp.csproj|c:\\users\\rafly al fahrezi\\documents\\programing\\pbkk\\studentregistrationapp\\studentregistrationapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{574D1BF3-C25A-4F05-B373-BED35FCC3FEC}|StudentRegistrationApp\\StudentRegistrationApp.csproj|solutionrelative:studentregistrationapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Rafly Al Fahrezi\\Documents\\PROGRAMING\\PBKK\\StudentRegistrationApp\\StudentRegistrationApp\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "StudentRegistrationApp\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Rafly Al Fahrezi\\Documents\\PROGRAMING\\PBKK\\StudentRegistrationApp\\StudentRegistrationApp\\MainWindow.xaml",
+              "RelativeToolTip": "StudentRegistrationApp\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-08T13:46:40.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Rafly Al Fahrezi\\Documents\\PROGRAMING\\PBKK\\StudentRegistrationApp\\StudentRegistrationApp\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "StudentRegistrationApp\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Rafly Al Fahrezi\\Documents\\PROGRAMING\\PBKK\\StudentRegistrationApp\\StudentRegistrationApp\\MainWindow.xaml.cs",
+              "RelativeToolTip": "StudentRegistrationApp\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAmwHUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-08T13:46:37.434Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
